@@ -24,14 +24,14 @@ public class Guerreiro extends Heroi {
         this.rage = rage;
     }
 
-    public Guerreiro(Integer rage, Integer maxExperiencia, String nome, Integer saude, Integer nivel, Integer experiencia, Integer dano, Integer defesa) {
-        super(maxExperiencia, nome, saude, nivel, experiencia, dano, defesa);
+    public Guerreiro(Integer rage, Integer maxExperiencia, String nome, Integer saude, Integer nivel, Integer experiencia, Integer dano, Integer defesa, Bolsa bolsa) {
+        super(maxExperiencia, nome, saude, nivel, experiencia, dano, defesa, bolsa);
         this.rage = rage;
     }
 
     @Override
     public Integer atacar(Personagem inimigo) {
-        Integer danoAtual = this.getDano();
+        Integer danoAtual = this.dano;
         this.setDano(danoAtual + rage);
         Integer danoFinal = super.atacar(inimigo);
         this.setDano(danoAtual);

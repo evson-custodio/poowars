@@ -9,6 +9,17 @@ package models;
  *
  * @author evson
  */
-public class Monstro {
+public class Monstro extends Personagem {
+    public Monstro() {
+        
+    }
     
+    public void droparBolsa(Heroi heroi) {
+        
+    }
+    
+    public void droparExp(Heroi heroi) {
+        heroi.setExperiencia(heroi.getExperiencia() + this.getExperiencia());
+        heroi.passarNivel();
+    }
 }

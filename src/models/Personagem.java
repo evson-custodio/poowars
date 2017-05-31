@@ -10,24 +10,26 @@ package models;
  * @author evson
  */
 public abstract class Personagem {
-    private String nome;
-    private Integer saude;
-    private Integer nivel;
-    private Integer experiencia;
-    private Integer dano;
-    private Integer defesa;
+    protected String nome;
+    protected Integer saude;
+    protected Integer nivel;
+    protected Integer experiencia;
+    protected Integer dano;
+    protected Integer defesa;
+    protected Bolsa bolsa;
 
     public Personagem() {
         
     }
 
-    public Personagem(String nome, Integer saude, Integer nivel, Integer experiencia, Integer dano, Integer defesa) {
+    public Personagem(String nome, Integer saude, Integer nivel, Integer experiencia, Integer dano, Integer defesa, Bolsa bolsa) {
         this.nome = nome;
         this.saude = saude;
         this.nivel = nivel;
         this.experiencia = experiencia;
         this.dano = dano;
         this.defesa = defesa;
+        this.bolsa = bolsa;
     }
 
     public void setDano(Integer dano) {
@@ -54,6 +56,10 @@ public abstract class Personagem {
         this.saude = saude;
     }
 
+    public void setBolsa(Bolsa bolsa) {
+        this.bolsa = bolsa;
+    }
+
     public Integer getDano() {
         return dano;
     }
@@ -77,13 +83,18 @@ public abstract class Personagem {
     public Integer getSaude() {
         return saude;
     }
+
+    public Bolsa getBolsa() {
+        return bolsa;
+    }
     
     public Integer atacar(Personagem inimigo) {
-        Integer danoFinal = (this.dano > inimigo.defesa ? (this.dano-inimigo.defesa) : 0);
+        Integer danoFinal = (this.dano > inimigo.defesa ? (this.dano - inimigo.defesa) : 0);
         inimigo.saude -= danoFinal;
-        
         return danoFinal;
     }
     
-    public abstract boolean morrer();
+    public boolean morrer() {
+        return this.saude == 0;
+    }
 }
