@@ -3,13 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package models;
+package models.personagem.heroi;
 
 /**
  *
  * @author evson
  */
-public interface Equipamento {
-    public void equipar();
-    public void desiquipar();
+public final class Guerreiro extends Heroi {
+    
 }

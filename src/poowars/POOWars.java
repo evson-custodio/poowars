@@ -5,9 +5,6 @@
  */
 package poowars;
 
-import models.Heroi;
-import models.Personagem;
-
 /**
  *
  * @author evson
@@ -20,5 +17,4 @@ public class POOWars {
     public static void main(String[] args) {
         
     }
-    
 }

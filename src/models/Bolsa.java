@@ -5,47 +5,88 @@
  */
 package models;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
+import models.item.Item;
 
 /**
  *
  * @author evson
  */
-public class Bolsa {
+public final class Bolsa {
+    private Integer id;
     private Integer gold;
-    private List<Item> itens;
+    private Map<Integer, Item> itens;
 
     public Bolsa() {
-        
     }
 
-    public Bolsa(Integer gold, List<Item> itens) {
+    public Bolsa(Integer id, Integer gold, Map<Integer, Item> itens) {
+        this.id = id;
         this.gold = gold;
         this.itens = itens;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public void setGold(Integer gold) {
         this.gold = gold;
     }
 
+    public void setItens(Map<Integer, Item> itens) {
+        this.itens = itens;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
     public Integer getGold() {
         return gold;
     }
+
+    public Map<Integer, Item> getItens() {
+        return itens;
+    }
     
     public void addItem(Item item) {
-        if(this.itens == null) {
-            this.itens = new ArrayList<>();
+        try {
+            if (itens == null) {
+                itens = new HashMap<>();
+            }
+            
+            Item i = itens.get(item.getId());
+            i.setQuantidade(i.getQuantidade() + item.getQuantidade());
         }
-        
-        if(this.itens.contains(item)) {
-            item.setQuantidade(item.getQuantidade() + 1);
-        } else {
-            this.itens.add(item);
+        catch(NullPointerException ex) {
+            itens.put(item.getId(), item);
         }
     }
     
     public void removeItem(Item item) {
+        try {
+            if (itens != null) {
+                Item i = itens.get(item.getId());
+                i.setQuantidade(i.getQuantidade() - item.getQuantidade());
+            }
+        }
+        catch(NullPointerException ex) {
+            System.out.println("O item não existe na sua bolsa: " + ex);
+        }
+    }
+    
+    public boolean comprar(Bolsa bolsa, Item item) {
+        int valorTotal = item.getValor() * item.getQuantidade();
+        if (gold >= valorTotal) {
+            gold -= valorTotal;
+            bolsa.setGold(bolsa.getGold() + valorTotal);
+            this.addItem(item);
+            bolsa.removeItem(item);
+            return true;
+        }
         
+        return false;
     }
 }

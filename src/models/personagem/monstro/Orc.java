@@ -3,12 +3,20 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package models;
+package models.personagem.monstro;
+
+import models.personagem.heroi.Heroi;
 
 /**
  *
  * @author evson
  */
-public class Arma {
+public final class Orc extends Monstro {
+
+    public Orc() {
+    }
     
+    public int machado(Heroi heroi) {
+        return 0;
+    }
 }
