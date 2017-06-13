@@ -5,18 +5,10 @@
  */
 package models.personagem.monstro;
 
-import models.personagem.heroi.Heroi;
-
 /**
  *
  * @author evson
  */
 public final class Bruxa extends Monstro {
-
-    public Bruxa() {
-    }
     
-    public int feitico(Heroi heroi) {
-        return 0;
-    }
 }

@@ -10,11 +10,5 @@ package models.personagem.monstro;
  * @author evson
  */
 public final class Troll extends Monstro {
-
-    public Troll() {
-    }
     
-    public int regenerar() {
-        return 0;
-    }
 }

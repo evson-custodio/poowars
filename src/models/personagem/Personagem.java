@@ -15,8 +15,10 @@ import models.Bolsa;
 public abstract class Personagem {
     protected Integer id;
     protected String nome;
-    protected Integer experiencia;
+    protected Integer exp;
+    protected Integer nivelMax;
     protected Integer nivel;
+    protected Integer saudeMax;
     protected Integer saude;
     protected Integer dano;
     protected Integer defesa;
@@ -25,11 +27,13 @@ public abstract class Personagem {
     public Personagem() {
     }
 
-    public Personagem(Integer id, String nome, Integer experiencia, Integer nivel, Integer saude, Integer dano, Integer defesa, Bolsa bolsa) {
+    public Personagem(Integer id, String nome, Integer exp, Integer nivelMax, Integer nivel, Integer saudeMax, Integer saude, Integer dano, Integer defesa, Bolsa bolsa) {
         this.id = id;
         this.nome = nome;
-        this.experiencia = experiencia;
+        this.exp = exp;
+        this.nivelMax = nivelMax;
         this.nivel = nivel;
+        this.saudeMax = saudeMax;
         this.saude = saude;
         this.dano = dano;
         this.defesa = defesa;
@@ -44,12 +48,20 @@ public abstract class Personagem {
         this.nome = nome;
     }
 
-    public void setExperiencia(Integer experiencia) {
-        this.experiencia = experiencia;
+    public void setExp(Integer exp) {
+        this.exp = exp;
+    }
+
+    public void setNivelMax(Integer nivelMax) {
+        this.nivelMax = nivelMax;
     }
 
     public void setNivel(Integer nivel) {
         this.nivel = nivel;
+    }
+
+    public void setSaudeMax(Integer saudeMax) {
+        this.saudeMax = saudeMax;
     }
 
     public void setSaude(Integer saude) {
@@ -76,12 +88,20 @@ public abstract class Personagem {
         return nome;
     }
 
-    public Integer getExperiencia() {
-        return experiencia;
+    public Integer getExp() {
+        return exp;
+    }
+
+    public Integer getNivelMax() {
+        return nivelMax;
     }
 
     public Integer getNivel() {
         return nivel;
+    }
+
+    public Integer getSaudeMax() {
+        return saudeMax;
     }
 
     public Integer getSaude() {
@@ -100,20 +120,25 @@ public abstract class Personagem {
         return bolsa;
     }
     
-    public int atacar(Personagem inimigo) {
-        int danoFinal = dano > inimigo.defesa ? (dano - inimigo.defesa) : 0;
-        inimigo.saude -= danoFinal;
-        return danoFinal;
+    public Integer atacar(Personagem inimigo) {
+        if (inimigo != null) {
+            Integer danoFinal = (this.dano > inimigo.defesa) ? (this.dano - inimigo.defesa) : 0;
+            inimigo.saude -= danoFinal;
+            
+            return danoFinal;
+        }
+        
+        return null;
     }
     
-    public boolean morrer() {
-        return saude == 0;
+    public Boolean morrer() {
+        return this.saude <= 0;
     }
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 17 * hash + Objects.hashCode(this.id);
+        int hash = 3;
+        hash = 47 * hash + Objects.hashCode(this.id);
         return hash;
     }
 
@@ -130,5 +155,5 @@ public abstract class Personagem {
         }
         final Personagem other = (Personagem) obj;
         return Objects.equals(this.id, other.id);
-    }   
+    }
 }

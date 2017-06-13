@@ -5,18 +5,10 @@
  */
 package models.personagem.monstro;
 
-import models.personagem.heroi.Heroi;
-
 /**
  *
  * @author evson
  */
 public final class Orc extends Monstro {
-
-    public Orc() {
-    }
     
-    public int machado(Heroi heroi) {
-        return 0;
-    }
 }

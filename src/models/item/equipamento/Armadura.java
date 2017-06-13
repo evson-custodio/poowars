@@ -6,19 +6,22 @@
 package models.item.equipamento;
 
 import models.item.Item;
-import models.personagem.heroi.Heroi;
 
 /**
  *
  * @author evson
  */
-public class Armadura extends Item implements Equipamento<Heroi> {
+public final class Armadura extends Item {
     private Integer defesa;
 
     public Armadura() {
     }
 
-    public Armadura(Integer id, String nome, Integer quantidade, Integer valor, Integer defesa) {
+    public Armadura(Integer defesa) {
+        this.defesa = defesa;
+    }
+
+    public Armadura(Integer defesa, Integer id, String nome, Integer quantidade, Integer valor) {
         super(id, nome, quantidade, valor);
         this.defesa = defesa;
     }
@@ -29,15 +32,5 @@ public class Armadura extends Item implements Equipamento<Heroi> {
 
     public Integer getDefesa() {
         return defesa;
-    }
-
-    @Override
-    public boolean equipar(Heroi heroi) {
-        return true;
-    }
-
-    @Override
-    public boolean desequipar(Heroi heroi) {
-        return true;
     }
 }

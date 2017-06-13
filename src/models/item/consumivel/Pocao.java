@@ -17,7 +17,11 @@ public final class Pocao extends Item {
     public Pocao() {
     }
 
-    public Pocao(Integer id, String nome, Integer quantidade, Integer valor, Integer cura) {
+    public Pocao(Integer cura) {
+        this.cura = cura;
+    }
+
+    public Pocao(Integer cura, Integer id, String nome, Integer quantidade, Integer valor) {
         super(id, nome, quantidade, valor);
         this.cura = cura;
     }

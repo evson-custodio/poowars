@@ -7,6 +7,7 @@ package models;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 import models.item.Item;
 
 /**
@@ -52,41 +53,50 @@ public final class Bolsa {
     }
     
     public void addItem(Item item) {
-        try {
+        if (item != null) {
             if (itens == null) {
                 itens = new HashMap<>();
             }
-            
-            Item i = itens.get(item.getId());
-            i.setQuantidade(i.getQuantidade() + item.getQuantidade());
-        }
-        catch(NullPointerException ex) {
-            itens.put(item.getId(), item);
+            Item other = itens.get(item.getId());
+            if (other != null) {
+                other.setQuantidade(other.getQuantidade() + item.getQuantidade());
+            }
+            else {
+                itens.put(item.getId(), item);
+            }
         }
     }
     
     public void removeItem(Item item) {
-        try {
+        if (item != null) {
             if (itens != null) {
-                Item i = itens.get(item.getId());
-                i.setQuantidade(i.getQuantidade() - item.getQuantidade());
+                Item other = itens.get(item.getId());
+                if (other != null) {
+                    other.setQuantidade(other.getQuantidade() - item.getQuantidade());
+                }
             }
         }
-        catch(NullPointerException ex) {
-            System.out.println("O item não existe na sua bolsa: " + ex);
-        }
     }
-    
-    public boolean comprar(Bolsa bolsa, Item item) {
-        int valorTotal = item.getValor() * item.getQuantidade();
-        if (gold >= valorTotal) {
-            gold -= valorTotal;
-            bolsa.setGold(bolsa.getGold() + valorTotal);
-            this.addItem(item);
-            bolsa.removeItem(item);
+
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 19 * hash + Objects.hashCode(this.id);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
             return true;
         }
-        
-        return false;
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Bolsa other = (Bolsa) obj;
+        return Objects.equals(this.id, other.id);
     }
 }

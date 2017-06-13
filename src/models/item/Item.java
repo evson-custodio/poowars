@@ -61,8 +61,8 @@ public abstract class Item {
 
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 67 * hash + Objects.hashCode(this.id);
+        int hash = 7;
+        hash = 19 * hash + Objects.hashCode(this.id);
         return hash;
     }
 
